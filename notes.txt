@@ -1,0 +1,23 @@
+===================================================================================
+Day 16 OOPs
+# What
+# has -- Attribute -- basically variables
+# does -- method -- functions
+# oop is basically a blue print to generate multiple instances of same thing.
+# the module wont' be activated unless its method/attributes are not being used.
+# object.attribute  -- car.speed
+# function tied to an object called as methods
+**In order to get the implementation of python package right click and choose see implementation.
+===================================================================================
+
+Double -- Ctrl+Q (View | Quick Documentation)
+
+brake is a method, which means it's a function associated with the car object. We cannot assign a value to a function call.
+
+oops done
+python -- real python
+datacamp python
+
+Angela YU Python
+work on website wordpress and host it.
+youtube brand ankur warikoo
