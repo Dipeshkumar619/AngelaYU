@@ -28,12 +28,14 @@
 # weather_C={"Monday":12,"Tuesday": 14,"Wednesday": 15,"Thursday": 14,"Friday": 21,"Saturday": 22,"Sunday": 24}
 # weather_F={k:(v*9/5+32) for (k,v) in weather_C.items()}
 # print(weather_F)
-import pandas
-student_dict={
-    "student":["Angela","James","Lily"],
-    "score":[56, 57, 78]
-}
-student_data_frame=pandas.DataFrame(student_dict)
-for (k,v) in student_data_frame.items():
-    print(k,v)
-
+# import pandas
+# student_dict={
+#     "student":["Angela","James","Lily"],
+#     "score":[56, 57, 78]
+# }
+# student_data_frame=pandas.DataFrame(student_dict)
+# # for (k,v) in student_data_frame.items():
+# #     print(k,v)
+#
+# for (index,rows) in student_data_frame.iterrows():
+#     print(rows)
