@@ -16,9 +16,9 @@ timer = None
 # ---------------------------- TIMER RESET ------------------------------- #
 def reset_timer():
     window.after_cancel(timer)
-    timer_status="Timer"
-    mark=""
-
+    canvas.itemconfig(timer_text,text="00:00")
+    title.config(text="Timer")
+    check_mark.config(text="")
 
 # ---------------------------- TIMER MECHANISM ------------------------------- # 
 def start_timer():
@@ -57,7 +57,6 @@ window=Tk()
 window.title("Pomodoro")
 
 window.config(pady=10,padx=10,bg=YELLOW)
-
 canvas=Canvas(width=200,height=224,bg=YELLOW,highlightthickness=0)
 title=Label(text=f"{timer_status}",font=(FONT_NAME,50,"bold"),fg=GREEN,bg=YELLOW)
 title.grid(column=1,row=0)
