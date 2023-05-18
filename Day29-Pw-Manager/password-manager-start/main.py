@@ -1,6 +1,7 @@
 from tkinter import  *
 from tkinter import messagebox
 from random import randint,choice,shuffle
+import json
 import pyperclip
 PINK = "#e2979c"
 RED = "#e7305b"
@@ -29,17 +30,56 @@ def save():
     website=website_entry.get()
     password=password_input_entry.get()
     email=email_username_entry.get()
+    new_data={
+        website: {
+            "email": email,
+            "password": password,
+        }
+    }
     if len(website) ==0 or len(password) ==0 or len(email) == 0:
         messagebox.showerror(title="Error",message="These fields can't be empty, Please enter the field")
     else:
         isOk=messagebox.askokcancel(title=website,message=f"These are details entered {website},{password},{email}")
         if isOk:
-            with open("datafile.txt",'+a') as data:
-                data.writelines(f"{website}|{password}|{email}\n")
-            website_entry.delete(0,END)
-            password_input_entry.delete(0,END)
-            email_username_entry.delete(0,END)
-            email_username_entry.insert(END,"angela@gmail.com")
+            # with open("datafile.txt",'+a') as data:
+            #     data.writelines(f"{website}|{password}|{email}\n")
+            # website_entry.delete(0,END)
+            # password_input_entry.delete(0,END)
+            # email_username_entry.delete(0,END)
+            # email_username_entry.insert(END,"angela@gmail.com")
+            try:
+                with open("datafile.json",'r') as data_file:
+                    data=json.load(data_file)
+            except FileNotFoundError:
+                print("The file doesn't exist")
+                with open("datafile.json","w") as data_file:
+                    json.dump(new_data,data_file,indent=4)
+            else:
+                data.update(new_data)
+                with open("datafile.json","w") as data_file:
+                    json.dump(data,data_file,indent=4)
+            finally:
+                website_entry.delete(0,END)
+                password_input_entry.delete(0,END)
+                email_username_entry.delete(0,END)
+                email_username_entry.insert(END,"angela@gmail.com")
+# ---------------------------- Search ------------------------------- #
+def search():
+    search_entry=website_entry.get()
+    print(search_entry)
+    try:
+        with open('datafile.json','r') as datafile:
+            data=json.load(datafile)
+            if search_entry in data:
+                email=data[search_entry]["email"]
+                password=data[search_entry]["password"]
+                messagebox.showinfo(f"The email/Password is {email}, {password}")
+            elif len(search_entry) == 0:
+                messagebox.showwarning(f"Please enter something in website field to search")
+            else:
+                messagebox.showerror(message="The website credentials doesn't exist")
+    except FileNotFoundError:
+        messagebox.showinfo("data File doesn't exist as no data is saved")
 
 # ---------------------------- UI SETUP ------------------------------- #
 window=Tk()
@@ -78,6 +118,10 @@ generate_password_button.grid(row=3,column=2)
 
 add_button=Button(text="Add",width=36,command=save)
 add_button.grid(row=4,column=1)
+
+search_button=Button(text="Search",width="21",command=search)
+search_button.grid(row=1,column=0)
+
 canvas.grid(row=0,column=0)
 
 
